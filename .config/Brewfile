@@ -1,0 +1,18 @@
+tap homebrew/cask-fonts
+
+cask "keepassxc"
+cask "kitty"
+cask "thunderbird"
+cask "veracrypt"
+cask "vlc"
+cask "maccy"
+cask "mullvadvpn"
+cask "librewolf"
+cask "docker"
+cask "font-hack-nerd-font"
+
+brew "starship"
+brew "lazygit"
+brew "fd"
+brew "rg"
+brew "wget" 

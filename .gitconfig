@@ -1,0 +1,9 @@
+[user]
+	name = lonelysadness
+	email =
+[pull]
+	rebase = true
+[core]
+	excludesFile = ~/.gitignore
+[init]
+	defaultBranch = main

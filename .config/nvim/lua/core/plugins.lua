@@ -205,6 +205,7 @@ require("lazy").setup({
     },
     {
         "folke/tokyonight.nvim",
+        opts = { "night" },
         lazy = false,
         priority = 1000,
         config = function()
@@ -212,5 +213,12 @@ require("lazy").setup({
         end,
     },
 
-    "folke/which-key.nvim",
+    {
+        "folke/which-key.nvim",
+        config = function()
+            require("configs.whichkey_setup")
+        end,
+        cmd = "WhichKey",
+        event = "VeryLazy",
+    },
 })

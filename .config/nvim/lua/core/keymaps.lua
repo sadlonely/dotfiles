@@ -18,21 +18,33 @@ map("n", "<right>", "<nop>", { desc = "Disable <right> key" })
 
 -- keymaps for saving and quitting
 map("n", "<leader>w", ":w<CR>", { desc = " Save file" })
-map("n", "<leader>q", ":confirm q<CR>", { desc = " Quit" })
-map("n", "<C-q>", ":q!<CR>", { desc = " Quit without saving" })
+map("n", "<leader>q", ":confirm q<CR>", { desc = " Quit" })
+map("n", "<C-q>", ":q!<CR>", { desc = " Quit without saving" })
+
+-- keymaps for mooving through buffers
+map("n", "<S-k>", "<C-w>k", { desc = "Focus upper buffer" })
+map("n", "<S-j>", "<C-w>j", { desc = "Focus down buffer" })
+map("n", "<S-h>", "<C-w>h", { desc = "Focus left buffer" })
+map("n", "<S-l>", "<C-w>l", { desc = "Focus right buffer" })
+
+-- keymaps for resizing
+map("n", "<C-l>", ":vertical resize +2<CR>", { desc = " Augment the vertical size" })
+map("n", "<C-h>", ":vertical resize -2<CR>", { desc = " Reduce the vertical size" })
+map("n", "<C-j>", ":resize +2<CR>", { desc = " Augment the horizontal size" })
+map("n", "<C-k>", ":resize -2<CR>", { desc = " Reduce the horizontal size" })
 
 -- keymap for cutting text without yanking to register
 map("n", "x", '"_x', { desc = "Cut text without yanking to register" })
 
 -- keymaps for splitting windows
-map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
-map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+map("n", "<leader>sv", "<C-w>v", { desc = " Split window vertically" })
+map("n", "<leader>sh", "<C-w>s", { desc = " Split window horizontally" })
 
 -- keymaps for managing tabs
-map("n", "<leader>to", ":tabnew<CR>", { desc = " Open new tab" })
-map("n", "<leader>tx", ":tabclose<CR>", { desc = "Close current tab" })
-map("n", "<leader>tn", ":tabn<CR>", { desc = " Go to next tab" })
-map("n", "<leader>tp", ":tabp<CR>", { desc = " Go to previous tab" })
+map("n", "<leader>a", ":enew<CR>", { desc = " Open new tab" })
+map("n", "<leader>x", ":bdelete<CR>", { desc = " Close current tab" })
+map("n", "<leader>n", ":BufferLineCycleNext<CR>", { desc = " Go to next tab" })
+map("n", "<leader>p", ":BufferLineCyclePrev<CR>", { desc = " Go to previous tab" })
 
 -- keymap for opening lazygit panel
 map("n", "<leader>gg", ":LazyGit<CR>", { desc = " Open lazygit panel" })
@@ -55,11 +67,11 @@ map("n", "<leader>dt", ":lua toggle_diagnostics()<CR>", { desc = " Toggle dia
 -- keymaps for colorscheme
 map(
     "n",
-    "<leader>s",
+    "<leader>cs",
     "<cmd>lua require('telescope.builtin').colorscheme()<cr>",
     { desc = "Change colorscheme for actual session" }
 )
 
 -- keympas for mooving text
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "- Descends from a line the line" })
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = " Descends from a line the line" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = " Mount a line the line" })

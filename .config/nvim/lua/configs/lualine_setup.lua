@@ -30,7 +30,7 @@ end
 -- set the configuration options for lualine
 local config = {
     options = {
-        theme = "nord",
+        theme = "tokyonight",
         icons_enabled = true,
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },

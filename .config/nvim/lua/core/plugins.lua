@@ -130,12 +130,15 @@ require("lazy").setup({
     },
     {
         "nvim-telescope/telescope.nvim", -- a plugin that provides fuzzy finding and a live grep search tool.
-        "nvim-telescope/telescope-fzf-native.nvim", -- a plugin that provides a FZF source for Telescope.
         config = function()
             require("configs.telescope_setup")
         end,
     },
-
+    {
+        "nvim-telescope/telescope-fzf-native.nvim", -- a plugin that provides a FZF source for Telescope.
+        lazy = false,
+        priority = 1000,
+    },
     -- git integration --
 
     {
@@ -166,8 +169,16 @@ require("lazy").setup({
     {
         "shaunsingh/nord.nvim", -- a comfortable dark color scheme.
         priority = 1000,
+    },
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
         config = function()
             require("core.themes")
         end,
     },
+
+    "folke/which-key.nvim",
 })

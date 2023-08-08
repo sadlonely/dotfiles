@@ -1,8 +1,8 @@
--- import nord plugin safely
-local nord_status, nord = pcall(require, "nord")
+-- import tokyonight plugin safely
+local tokyonight_status = pcall(require, "tokyonight")
 
-if not nord_status then
+if not tokyonight_status then
     return
 else
-    vim.cmd([[colorscheme nord]])
+    vim.cmd([[colorscheme tokyonight]])
 end

@@ -58,3 +58,17 @@ map("n", "<leader>dq", ":lua vim.diagnostic.setloclist()<CR>", { desc = " Set
 map("n", "<leader>la", ":lua vim.lsp.buf.code_action()<CR>", { desc = " Show LSP code actions" })
 map("n", "K", ":lua vim.lsp.buf.hover<CR>", { desc = " Show LSP hover information" })
 map("n", "<leader>dt", ":lua toggle_diagnostics()<CR>", { desc = " Toggle diagnostics display" })
+
+map(
+    "n",
+    "<leader>s",
+    "<cmd>lua require('telescope.builtin').colorscheme()<cr>",
+    { desc = "Change colorscheme for actual session" }
+)
+
+-- MOVE CODE
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "test" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "test" })

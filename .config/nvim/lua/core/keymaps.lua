@@ -37,9 +37,6 @@ map("n", "<leader>tp", ":tabp<CR>", { desc = " Go to previous tab" })
 -- keymap for opening lazygit panel
 map("n", "<leader>gg", ":LazyGit<CR>", { desc = " Open lazygit panel" })
 
--- keymap for executing Python files in FTerm
-map("n", "<leader>p", ":Pyexec<CR>", { desc = " Execute Python file" })
-
 -- keymaps for using Telescope plugin
 map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = " Open Telescope find files dialog" })
 map("n", "<leader>fw", ":Telescope live_grep<CR>", { desc = " Open Telescope live grep search" })
@@ -55,6 +52,7 @@ map("n", "<leader>la", ":lua vim.lsp.buf.code_action()<CR>", { desc = " Show 
 map("n", "K", ":lua vim.lsp.buf.hover<CR>", { desc = " Show LSP hover information" })
 map("n", "<leader>dt", ":lua toggle_diagnostics()<CR>", { desc = " Toggle diagnostics display" })
 
+-- keymaps for colorscheme
 map(
     "n",
     "<leader>s",
@@ -62,9 +60,6 @@ map(
     { desc = "Change colorscheme for actual session" }
 )
 
--- MOVE CODE
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
-map("v", "J", ":m '>+1<CR>gv=gv", { desc = "test" })
-map("v", "K", ":m '<-2<CR>gv=gv", { desc = "test" })
+-- keympas for mooving text
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "- Descends from a line the line" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = " Mount a line the line" })

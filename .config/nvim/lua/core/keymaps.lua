@@ -37,10 +37,6 @@ map("n", "<leader>tp", ":tabp<CR>", { desc = " Go to previous tab" })
 -- keymap for opening lazygit panel
 map("n", "<leader>gg", ":LazyGit<CR>", { desc = " Open lazygit panel" })
 
--- keymaps for toggling FTerm
-map("n", "<leader>t", '<CMD>lua require("FTerm").toggle()<CR>', { desc = " Terminal" })
-map("t", "<leader>t", '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', { desc = " Terminal" })
-
 -- keymap for executing Python files in FTerm
 map("n", "<leader>p", ":Pyexec<CR>", { desc = " Execute Python file" })
 

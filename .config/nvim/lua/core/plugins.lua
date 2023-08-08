@@ -16,16 +16,16 @@ vim.opt.rtp:prepend(lazypath)
 
 -- configure lazy loaded plugins
 require("lazy").setup({
-
     -- utility --
 
-    "nvim-lua/plenary.nvim", -- a Lua library with a focus on high-level and useful.
+    { "nvim-lua/plenary.nvim", lazy = true }, -- a Lua library with a focus on high-level and useful.
 
     {
         "rcarriga/nvim-notify", -- a simple, lightweight notification library.
         config = function()
             require("configs.notify_setup")
         end,
+        event = "BufEnter",
     },
 
     {
@@ -33,6 +33,7 @@ require("lazy").setup({
         config = function()
             require("configs.comment_setup")
         end,
+        keys = { { "gc", mode = { "n", "v" } }, { "gb", mode = { "n", "v" } } },
     },
 
     {
@@ -47,13 +48,7 @@ require("lazy").setup({
         config = function()
             require("configs.autopairs_setup")
         end,
-    },
-
-    {
-        "numToStr/FTerm.nvim", -- a floating terminal plugin.
-        config = function()
-            require("configs.fterm_setup")
-        end,
+        event = "InsertEnter",
     },
 
     -- completion --
@@ -63,19 +58,28 @@ require("lazy").setup({
         config = function()
             require("configs.cmp_setup")
         end,
+        dependencies = {
+            "cmp-buffer",
+            "cmp-path",
+            "cmp-cmdline",
+            "cmp_luasnip",
+            "cmp-nvim-lsp",
+        },
     },
 
-    "hrsh7th/cmp-buffer", -- a buffer source for nvim-cmp.
+    { "hrsh7th/cmp-buffer", lazy = true }, -- a buffer source for nvim-cmp.
 
-    "hrsh7th/cmp-path", -- a path source for nvim-cmp.
+    { "hrsh7th/cmp-path", lazy = true }, -- a path source for nvim-cmp.
 
-    "hrsh7th/cmp-cmdline", -- a cmdline source for nvim-cmp.
+    { "hrsh7th/cmp-cmdline", lazy = true }, -- a cmdline source for nvim-cmp.
 
-    "L3MON4D3/LuaSnip", -- a snippet plugin for Neovim written in Lua.
+    { "saadparwaiz1/cmp_luasnip", lazy = true }, -- a LuaSnip source for nvim-cmp.
 
-    "saadparwaiz1/cmp_luasnip", -- a LuaSnip source for nvim-cmp.
+    { "hrsh7th/cmp-nvim-lsp", lazy = true }, -- a source for nvim-cmp that provides LSP completion suggestions.
 
-    "rafamadriz/friendly-snippets", -- a collection of friendly snippets for various programming languages.
+    { "L3MON4D3/LuaSnip", dependencies = "friendly-snippets" }, -- a snippet plugin for Neovim written in Lua.
+
+    { "rafamadriz/friendly-snippets", lazy = true }, -- a collection of friendly snippets for various programming languages.
 
     -- LSP (Language Server Protocol) --
 
@@ -84,26 +88,39 @@ require("lazy").setup({
         config = function()
             require("configs.lsp.lsp_setup")
         end,
+        lazy = true,
     },
-
-    "hrsh7th/cmp-nvim-lsp", -- a source for nvim-cmp that provides LSP completion suggestions.
 
     {
         "jose-elias-alvarez/null-ls.nvim", -- a plugin that allows you to use LSP diagnostics and code actions without a language server.
         config = function()
             require("configs.lsp.null-ls_setup")
         end,
+        lazy = true,
     },
 
-    "jayp0521/mason-null-ls.nvim", -- a null-ls integration for mason.nvim.
+    { "jayp0521/mason-null-ls.nvim", lazy = true }, -- a null-ls integration for mason.nvim.
 
-    "williamboman/mason-lspconfig.nvim", -- a lspconfig integration for mason.nvim.
+    {
+        "williamboman/mason-lspconfig.nvim", -- a lspconfig integration for mason.nvim.
+        lazy = true,
+        event = "BufEnter",
+        cmd = { "LspInstall", "LspUninstall" },
+    },
 
     {
         "williamboman/mason.nvim", -- a plugin that manages multiple LSP servers within Neovim.
         config = function()
             require("configs.lsp.mason_setup")
         end,
+        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+        build = function()
+            pcall(function()
+                require("mason-registry").refresh()
+            end)
+        end,
+        event = "BufEnter",
+        lazy = true,
     },
 
     {
@@ -111,6 +128,16 @@ require("lazy").setup({
         config = function()
             require("configs.treesitter_setup")
         end,
+        cmd = {
+            "TSInstall",
+            "TSUninstall",
+            "TSUpdate",
+            "TSUpdateSync",
+            "TSInstallInfo",
+            "TSInstallSync",
+            "TSInstallFromGrammar",
+        },
+        event = "BufEnter",
     },
 
     -- file navigation --
@@ -133,11 +160,14 @@ require("lazy").setup({
         config = function()
             require("configs.telescope_setup")
         end,
+        dependencies = { "telescope-fzf-native.nvim" },
+        lazy = true,
+        cmd = "Telescope",
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim", -- a plugin that provides a FZF source for Telescope.
-        lazy = false,
-        priority = 1000,
+        lazy = true,
+        build = "make",
     },
     -- git integration --
 
@@ -146,6 +176,8 @@ require("lazy").setup({
         config = function()
             require("configs.gitsigns_setup")
         end,
+        event = "BufEnter",
+        cmd = "Gitsigns",
     },
 
     "kdheepak/lazygit.nvim", -- a plugin to use lazygit inside Neovim.
@@ -168,13 +200,13 @@ require("lazy").setup({
 
     {
         "shaunsingh/nord.nvim", -- a comfortable dark color scheme.
+        lazy = false,
         priority = 1000,
     },
     {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        opts = {},
         config = function()
             require("core.themes")
         end,
